@@ -10,6 +10,13 @@
 03 paste :gitrepourl into this google form and submit it
    https://forms.gle/cuxhb8cbYaJLHRYz5
    ma_debai = toya03bainopmauflaskapiapp
+
+---
+python -m pip install --upgrade pip pipenv ; python -m pipenv --version
+python -m pipenv install  # install packages in Pipfile
+python -m pipenv --venv
+  # eg /home/namgivu/Desktop/nam/toya04bainopmauflaskapiapp/.venv/bin/python
+  # eg /home/namgivu/Desktop/nam/toya04bainopmauflaskapiapp/.venv/Script/python.exe
 """
 
 from flask import Flask, jsonify
