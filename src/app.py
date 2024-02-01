@@ -19,29 +19,43 @@ python -m pipenv --venv
   # eg /home/namgivu/Desktop/nam/toya04bainopmauflaskapiapp/.venv/Script/python.exe
 """
 
-from flask import Flask, jsonify
 import os
-#
-from src.helper import github_request
 
+from flask import Flask, jsonify
+
+from src.helper import github_request
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
-  pass#todo
+  return jsonify({})
 
 
 @app.route('/release')
 def release():
-  pass#todo
+  (dataList, retCode
+   ) = github_request('https://api.github.com/repos/pyenv/pyenv/releases')
+  print(f"retCode = {retCode}")
+  outList = []
+  if retCode == 200:
+    for r in dataList:
+      js = dict(r)
+      created_at = js['created_at']
+      tag_name = js['tag_name']
+      body = js['body']
+      #create a dict from param created_at, tag_name, body
+      d = {'created_at': created_at, 'tag_name': tag_name, 'body': body}
+
+      outList.append(d)
+  return outList, retCode
 
 
 @app.route('/most_3_recent/release')
 def most_3_recent__release():
-  pass#todo
+  pass  #todo
 
 
-if __name__=='__main__':
-  app.run(debug=True, port=os.environ.get('PORT', 5000) )
+if __name__ == '__main__':
+  app.run(debug=True, port=os.environ.get('PORT', 5000))
