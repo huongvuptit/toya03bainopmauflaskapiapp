@@ -37,7 +37,7 @@ def index():
 def release():
   (dataList, retCode
    ) = github_request('https://api.github.com/repos/pyenv/pyenv/releases')
-  print(f"retCode = {retCode}")
+  #print(f"retCode = {retCode}")
   outList = []
   if retCode == 200:
     for r in dataList:
@@ -54,7 +54,11 @@ def release():
 
 @app.route('/most_3_recent/release')
 def most_3_recent__release():
-  pass  #todo
+  (releaseList, retCode) = release()
+  if retCode == 200:
+    return releaseList[:3], retCode
+  else:
+    return [], retCode
 
 
 if __name__ == '__main__':
