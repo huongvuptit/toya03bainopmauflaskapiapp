@@ -47,8 +47,8 @@ def release():
       body = js['body']
       #create a dict from param created_at, tag_name, body
       d = {'created_at': created_at, 'tag_name': tag_name, 'body': body}
-
       outList.append(d)
+
   return outList, retCode
 
 
